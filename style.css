@@ -2,54 +2,9 @@
     --footer-height: 40px;
 }
 
-
-body {
-    background: black;
-    margin: 0;
-    padding: 0;
-    margin-top: 80px;
-    margin-bottom: var(--footer-height,40px);
-}
-/*
-@keyframes colour-change {
-    0% {
-        background:
-            linear-gradient(rgb(28, 0, 153), transparent),
-            linear-gradient(to top left, rgb(255, 0, 0), transparent),
-            linear-gradient(to top right, rgb(0, 154, 105), transparent);
-    }
-    50% {
-        background:
-            linear-gradient(rgb(0, 153, 25), transparent),
-            linear-gradient(to top left, rgb(255, 0, 0), transparent),
-            linear-gradient(to top right, rgb(0, 154, 105), transparent);
-    }
-    100% {
-        background:
-            linear-gradient(rgb(28, 0, 153), transparent),
-            linear-gradient(to top left, rgb(255, 0, 0), transparent),
-            linear-gradient(to top right, rgb(0, 154, 105), transparent);
-    }
-
-} */
-
-.colour-effect {
+html,body,main {
     width: 100%;
     height: 100%;
-    background-blend-mode: screen;
-    background:
-        linear-gradient(rgb(28, 0, 153), transparent),
-        linear-gradient(to top left, rgb(255, 0, 0), transparent),
-        linear-gradient(to top right, rgb(0, 154, 105), transparent);
-    /* animation-name: colour-change;
-    animation-duration: 4s;
-    animation-iteration-count: infinite; */
-}
-
-.cover-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 header {
@@ -69,16 +24,14 @@ header {
     inset: 0 0 auto 0;
 }
 
-.cover {
-    position: relative;
-    background-color: rgb(110, 0, 48);
-    padding: 8px;
-    border: 4px solid rgb(0, 78, 114);
-    border-radius: 8px;
-    text-align: center;
-    width: 200px;
-    margin: 16px;
+body {
+    background: black;
+    margin: 0;
+    padding: 0;
+    margin-top: 80px;
+    margin-bottom: var(--footer-height,40px);
 }
+
 
 footer {
     position: fixed;
@@ -97,19 +50,68 @@ footer {
     font-style: normal;
 }
 
-.metaballs_container {
+.backgroundplacer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     height: 100%;
-    padding: 0;
-    margin: 0;
 }
 
-.metaballs_canvas {
+.cover-container {
+    background-blend-mode: screen;
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+
+.background-primary {
+    opacity: 0.5;
+    position: absolute;
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to top left, red, transparent),
+        linear-gradient(to top right, blue, transparent),
+        linear-gradient(to bottom left,green,transparent),
+        linear-gradient(to bottom right, purple, transparent);
+}
+
+.cover {
+    position: relative;
+    background-color: rgb(110, 0, 48);
+    padding: 8px;
+    border: 4px solid rgb(0, 78, 114);
+    border-radius: 8px;
+    text-align: center;
+    width: 200px;
+    height: 300px;
+    margin: 16px;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: blue;
+}
+
+::-webkit-scrollbar-thumb {
+    background: red;
 }
