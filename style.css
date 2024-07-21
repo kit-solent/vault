@@ -5,7 +5,8 @@
                                    linear-gradient(to top    right, blue,   transparent),
                                    linear-gradient(to bottom left , green,  transparent),
                                    linear-gradient(to bottom right, purple, transparent);
-    --background-gradient-secondary: var(--background-gradient-primary)
+    --background-gradient-secondary: var(--background-gradient-primary);
+    --background-secondary-opacity: 1.0;
 }
 
 html,body,main {
@@ -64,8 +65,9 @@ footer {
     position: relative;
 }
 
-/* background styles */
+/* ↓↓ background styles below ↓↓ */
 .background-placer {
+    overflow: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -81,17 +83,24 @@ footer {
 }
 
 .background-primary {
-    opacity: 0.5;
+    overflow: auto;
+    /*border-radius: 25px;*/
+    opacity: 1.0;
     position: absolute;
     display: block;
     margin: 0;
     width: 100%;
     height: 100%;
-    background-image: var(--background-gradient-primary);
+    background-image: var(--background-gradient-primary, linear-gradient(to top    left , red,    transparent),
+    linear-gradient(to top    right, blue,   transparent),
+    linear-gradient(to bottom left , green,  transparent),
+    linear-gradient(to bottom right, purple, transparent));
 }
 
 .background-secondary {
-    opacity: 0;
+    overflow: auto;
+    border-radius: 2500px;
+    opacity: var(--background-secondary-opacity,0.0);
     position: absolute;
     display: block;
     margin: 0;
@@ -99,28 +108,27 @@ footer {
     height: 100%;
     background-image: var(--background-gradient-secondary);
 }
-
-
+/* ↑↑ background styles above ↑↑ */
 
 .cover {
     position: relative;
-    background-color: rgb(110, 0, 48);
+    background-color: rgb(0, 0, 0);
+    color: white;
     padding: 8px;
-    border: 4px solid rgb(0, 78, 114);
+    border: 4px solid rgb(0, 0, 0);
     border-radius: 8px;
     text-align: center;
     width: 200px;
     height: 300px;
     margin: 16px;
-    overflow: hidden;
+
 }
 
+.inner:hover {
+    filter: blur(4px);
+
+}
 
 ::-webkit-scrollbar {
-    width: 8px;
-    background: blue;
-}
-
-::-webkit-scrollbar-thumb {
-    background: red;
+    width: 0px;
 }

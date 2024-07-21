@@ -91,10 +91,6 @@ function setup_gradient_changes(gradient = null) {
             element.prepend(secondaryDiv);
         }
 
-        // TODO: make sure that the order of element's child elements are as follows:
-        // background-primary
-        // background-secondary
-        // all other elements
         reorder_children(element);
     }
 }
