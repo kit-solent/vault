@@ -135,5 +135,5 @@ function next_gradient(gradient=null) {
     }
 }
 
-//next_gradient();
-//setInterval(next_gradient,2000);
+next_gradient();
+setInterval(next_gradient,2000);
