@@ -136,5 +136,4 @@ function next_gradient(gradient=null) {
 }
 
 next_gradient();
-setTimeout(next_gradient,1000)
-//setInterval(next_gradient,2000);
+setInterval(next_gradient,2000);
