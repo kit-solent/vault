@@ -98,7 +98,17 @@ footer {
     linear-gradient(to bottom right, purple, transparent));
 }
 
+@keyframes opacity-transition{
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+
 .background-secondary {
+    animation: opacity-transition 2s linear;
     z-index: -1;
     overflow: auto;
     border-radius: 2500px;
