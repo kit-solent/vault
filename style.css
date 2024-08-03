@@ -85,7 +85,6 @@ footer {
 .background-primary {
     z-index: -2;
     overflow: auto;
-    /*border-radius: 25px;*/
     opacity: 1.0;
     position: absolute;
     display: block;
@@ -98,20 +97,9 @@ footer {
     linear-gradient(to bottom right, purple, transparent));
 }
 
-@keyframes opacity-transition{
-    from {
-        opacity: 1.0;
-    }
-    to {
-        opacity: 0.0;
-    }
-}
-
 .background-secondary {
-    animation: opacity-transition 2s linear;
     z-index: -1;
     overflow: auto;
-    border-radius: 2500px;
     opacity: var(--background-secondary-opacity,0.0);
     position: absolute;
     display: block;
@@ -123,7 +111,6 @@ footer {
 /* ↑↑ background styles above ↑↑ */
 
 .cover {
-    position: relative;
     background-color: rgb(0, 0, 0);
     color: white;
     padding: 8px;
@@ -133,12 +120,6 @@ footer {
     width: 200px;
     height: 300px;
     margin: 16px;
-
-}
-
-.inner:hover {
-    filter: blur(4px);
-
 }
 
 ::-webkit-scrollbar {
