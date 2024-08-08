@@ -76,11 +76,14 @@ footer {
     height: 100%;
 }
 
+/* fades out the background */
 .opacity-fade {
+    opacity: 0.0;
     transition-property: opacity;
     transition-duration: var(--opacity-fade-duration,2s);
     transition-timing-function: linear; /*this is because we want the background to be changing constantly and smoothly*/
 }
+
 
 .background-primary {
     z-index: -2;
@@ -98,6 +101,7 @@ footer {
 }
 
 .background-secondary {
+    border-radius: 10000px;
     z-index: -1;
     overflow: auto;
     opacity: var(--background-secondary-opacity,0.0);

@@ -1,7 +1,3 @@
-import { useState } from 'react';
-
-useState
-
 var root = document.querySelector(":root");
 var root_style = getComputedStyle(root);
 
@@ -22,6 +18,10 @@ function random_gradient() {
            `linear-gradient(to bottom right, #${random_hex()}, transparent)`;
 }
 
+/**
+ *
+ * @param {colour???TODO} gradient
+ */
 function setup_gradient_changes(gradient = null) {
     if (!gradient) {
         gradient = random_gradient();
@@ -78,6 +78,10 @@ function setup_gradient_changes(gradient = null) {
 
         // put the backgrounds into the correct order. This is required for the fading effect to work.
         reorder_children(element);
+
+        // prevents initial black screen before fist transiiton.
+        next_gradient();
+        setInterval(next_gradient,2000);
     }
 }
 
@@ -102,8 +106,6 @@ function reorder_children(element) {
     otherElements.forEach(other => element.appendChild(other));
 }
 
-document.addEventListener("DOMContentLoaded",setup_gradient_changes);
-
 var already_warned = false
 function next_gradient(gradient=null) {
     if (!gradient) {
@@ -120,24 +122,16 @@ function next_gradient(gradient=null) {
 
         // set the gradient of all background-secondary elements to the old gradient to cover the gradient change for the background-primary elements.
         root.style.setProperty("--background-gradient-secondary"  ,old_grad);
-        //alert("background-secondary set to old_grad");
-        // remove the opacity-fade class so that we can instantly set the opacity to 1 (fully shown)
-        // Array.from must be used so that forEach can be used.
+
+        // the fade in is instant
         Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.remove("opacity-fade"));
-        //alert("opacity-fade class removed: expect sudden change to full opacity");
-        // make all the background-secondary elements visible, hiding the background-primary elements,
-        // and allowing them to change gradient without being seen.
-        root.style.setProperty("--background-secondary-opacity"  ,"1.0");
-        //alert();
-        // add the opacity-fade class back onto all the background-secondary elements.
-        Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.add("opacity-fade"));
-        //alert();
+
         root.style.setProperty("--background-gradient-primary" ,gradient); // this is the gradient calculated at the start of this funcion
-        //alert();
-        // fade out the background-secondary elements, letting the newly coloured background-primary elements show gradually.
-        root.style.setProperty("--background-secondary-opacity" ,"0.0");
+
+        // the fade out is gradual
+        Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.add("opacity-fade"));
+
     }
 }
 
-next_gradient();
-setInterval(next_gradient,2000);
+document.addEventListener("DOMContentLoaded",setup_gradient_changes);
