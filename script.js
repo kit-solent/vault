@@ -12,6 +12,7 @@ function random_hex() {
 }
 
 function random_gradient() {
+
     return `linear-gradient(to top    left,  #${random_hex()}, transparent),`+
            `linear-gradient(to top    right, #${random_hex()}, transparent),`+
            `linear-gradient(to bottom left,  #${random_hex()}, transparent),`+
@@ -19,8 +20,8 @@ function random_gradient() {
 }
 
 /**
- *
- * @param {colour???TODO} gradient
+ * creates and sets up the background elements if required.
+ * runs the first transition.
  */
 function setup_gradient_changes(gradient = null) {
     if (!gradient) {
@@ -124,14 +125,21 @@ function next_gradient(gradient=null) {
         root.style.setProperty("--background-gradient-secondary"  ,old_grad);
 
         // the fade in is instant
+        console.log("removing opacity-fade (showing element)")
         Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.remove("opacity-fade"));
 
         root.style.setProperty("--background-gradient-primary" ,gradient); // this is the gradient calculated at the start of this funcion
 
         // the fade out is gradual
-        Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.add("opacity-fade"));
+        console.log("adding opacity-fade class");
 
+        setTimeout(delayed_fade_out,20,element);
     }
+}
+
+function delayed_fade_out(element) {
+    Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.add("opacity-fade"));
+    console.log(element);
 }
 
 document.addEventListener("DOMContentLoaded",setup_gradient_changes);
