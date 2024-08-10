@@ -101,7 +101,6 @@ footer {
 }
 
 .background-secondary {
-    border-radius: 10000px;
     z-index: -1;
     overflow: auto;
     opacity: var(--background-secondary-opacity,0.0);

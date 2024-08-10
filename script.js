@@ -82,7 +82,6 @@ function setup_gradient_changes(gradient = null) {
 
         // prevents initial black screen before fist transiiton.
         next_gradient();
-        setInterval(next_gradient,2000);
     }
 }
 
@@ -107,39 +106,20 @@ function reorder_children(element) {
     otherElements.forEach(other => element.appendChild(other));
 }
 
-var already_warned = false
+var current_gradient = random_gradient();
 function next_gradient(gradient=null) {
     if (!gradient) {
         gradient = random_gradient();
     }
 
-    var color_effect_elements = document.getElementsByClassName("background-placer");
+    // set the gradient of all background-secondary elements to the old gradient to cover the gradient change for the background-primary elements.
+    $(".background-secondary").css("background-image",current_gradient).show();
 
-    for (let i=0; i<color_effect_elements.length; i++) {
-        var element = color_effect_elements[i];
+    current_gradient = gradient;
+    $(".background-primary").css("background-image",current_gradient);
 
-        // remember the previous gradient so we can change
-        var old_grad = root_style.getPropertyValue("--background-gradient-primary");
-
-        // set the gradient of all background-secondary elements to the old gradient to cover the gradient change for the background-primary elements.
-        root.style.setProperty("--background-gradient-secondary"  ,old_grad);
-
-        // the fade in is instant
-        console.log("removing opacity-fade (showing element)")
-        Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.remove("opacity-fade"));
-
-        root.style.setProperty("--background-gradient-primary" ,gradient); // this is the gradient calculated at the start of this funcion
-
-        // the fade out is gradual
-        console.log("adding opacity-fade class");
-
-        setTimeout(delayed_fade_out,20,element);
-    }
-}
-
-function delayed_fade_out(element) {
-    Array.from(element.getElementsByClassName("background-secondary")).forEach(child => child.classList.add("opacity-fade"));
-    console.log(element);
+    // the fade out is gradual
+    $(".background-secondary").fadeOut(2000,"linear",next_gradient);
 }
 
 document.addEventListener("DOMContentLoaded",setup_gradient_changes);
