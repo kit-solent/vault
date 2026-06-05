@@ -1,3 +1,5 @@
+/* NOTE: Next commit removes gradient transition */
+
 var root = document.querySelector(":root");
 var root_style = getComputedStyle(root);
 
