@@ -18,6 +18,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
     color: rgb(255, 255, 255);
     background: rgb(0, 0, 0);
     width: 100%;
@@ -28,6 +29,7 @@ header {
     z-index: 10;
     margin: 0;
     inset: 0 0 auto 0;
+    flex-wrap: wrap;
 }
 
 body {
