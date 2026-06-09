@@ -1,27 +1,45 @@
 :root {
     --footer-height: 40px;
     --opacity-fade-duration: 2s;
-    --background-gradient: linear-gradient(to top left, black, red);
+    --background-gradient: linear-gradient(to top, green, red);
 }
 
-main, body, html{
-    width: 100%;
-    height: 100%;
+/* contains all visible content on the page */
+body{
+    /* take up the full viewport with no extra spacing inside or out */
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column; /* align the header, main, and footer vertically */
+    align-items: stretch;
+}
+
+header footer {
+    /* flex item properties */
+    flex: none; /* don't allow resizing and use the default width/height */
+}
+
+main {
+    flex: 1; /* fill all available space, ignoring content size */
+    overflow-y: auto; /* allow vertical scrolling */
 }
 
 header {
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
     background: rgb(0, 0, 0);
-    width: 100%;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
     position: fixed;
-    z-index: 10;
+    z-index: 1;
     margin: 0;
     top: 0;
 }
@@ -34,18 +52,11 @@ br {
 header h1 {
     color: white;
     mix-blend-mode: screen;
+    margin: 0px;
 }
 
 header i {
     color: white;
-}
-
-body {
-    background: black;
-    margin: 0;
-    padding: 0;
-    margin-top: 80px;
-    margin-bottom: var(--footer-height,40px); 
 }
 
 footer {
@@ -101,6 +112,8 @@ footer {
     color: white;
 }
 
+/*
 ::-webkit-scrollbar {
     width: 0px;
 }
+*/

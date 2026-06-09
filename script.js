@@ -25,15 +25,57 @@ function cover_focus_lost() {
 }
 
 function process_book_directory(data) {
-    data.forEach(book => load_book_cover(book))
+    data.forEach(book => load_book_cover(book));
+    // TODO: make and here remove a message saying that books are still being loaded
 }
 
 function load_book_cover(book) {
-    
+    // load the cover template and extract the contents as jQuery data
+    const cover_template = $("#cover-template");
+    const cover_raw = cover_template.prop("content");
+    const cover = $(cover_raw).find(".cover")
+
+    // console.log(cover);
+
+    // remove the ".html" from the book name
+    var cover_id = "book-"+book.slice(0, -5)
+    cover.id = cover_id;
+
+    // cover.find(".cover-title").id = cover_id + "-title";
+    // cover.find(".cover-blurb").id = cover_id + "-blurb";
+
+    // insert the new cover into the page before filling
+    // it with a title and blurb
+    console.log("adding a cover");
+    // console.log(typeof(cover));
+    // console.log(cover);
+    $("#background").append(cover);
+
+    // load the book data
+    // $(`#${cover_id}-title`).load(`books/${book} #book-title`);
+    // $(`#${cover_id}-blurb`).load(`books/${book} #book-blurb`);
+
+    // $.get(`books/${book}`, function(string_data) {
+    //     // extract the title and blurb from the book
+    //     var data = $(string_data);
+    //     console.log((string_data));
+    //     console.log(typeof(data));
+    //     console.log(data);
+
+    //     title = data.querySelector(".book-title");
+    //     blurb = data.querySelector(".book-blurb");
+
+    //     // get a copy of the book cover template
+    //     cover = cover_template.content.cloneNode(true);
+    //     cover.querySelector(".cover-title").textContent = title;
+    //     cover.querySelector(".cover-blurb").textContent = blurb;
+
+    // },"html") // we should be getting html data
 }
 
 function book_directory_not_found() {
-
+    console.log("Can't find books/directory.json")
+    alert("Can't find books/directory.json")
 }
 
 function setup(event) {
@@ -46,11 +88,11 @@ function setup(event) {
     // or via the variable
     root.style.setProperty("--background-gradient", gradient);
 
-    //// locate all the books in the directory
-    $.getJSON("books/directory.json", process_book_directory)
-        .fail(book_directory_not_found)
-
-
+    if (page_id == "index") {
+        // locate all the books in the directory
+        $.getJSON("books/directory.json", process_book_directory)
+            .fail(book_directory_not_found)
+    }
 
     //// bind loss of mouse focus for covers
     $(".cover").attr("tabindex", -1);
