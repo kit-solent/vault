@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Body Layout</title>
+    <style>
+        /* 1. Ensure the layout container spans the full viewport height */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 2. Configure the body as a vertical Flexbox container */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 3. Style the layout structural components */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 4. Force the main element to absorb all remaining space */
+        main {
+            flex: 1 0 auto; 
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Website Header</h1>
+    </header>
+
+    <main>
+        <h2>Main Content Area</h2>
+        <p>The body uses vertical flex configuration. This main block automatically expands to push the footer down. The body uses vertical flex configuration. This main block automatically expands to push the footer down. The body uses vertical flex configuration. This main block automatically expands to push the footer down. The body uses vertical flex configuration. This main block automatically expands to push the footer down. The body uses vertical flex configuration. </p>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Flexbox Layout Example</p>
+    </footer>
+
+</body>
+</html>

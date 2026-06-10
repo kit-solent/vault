@@ -1,6 +1,6 @@
 var root = document.querySelector(":root");
 var root_style = getComputedStyle(root);
-const page_id = $("meta[name='page-id']").attr("content")
+const page_id = $("meta[name='page-id']").attr("content");
 
 function random_hex() {
     var return_value = "";
@@ -33,16 +33,16 @@ function load_book_cover(book) {
     // load the cover template and extract the contents as jQuery data
     const cover_template = $("#cover-template");
     const cover_raw = cover_template.prop("content");
-    const cover = $(cover_raw).find(".cover")
+    const cover = $(cover_raw).find(".cover");
 
     // console.log(cover);
 
     // remove the ".html" from the book name
-    var cover_id = "book-"+book.slice(0, -5)
+    var cover_id = "book-"+book.slice(0, -5);
     cover.id = cover_id;
 
-    // cover.find(".cover-title").id = cover_id + "-title";
-    // cover.find(".cover-blurb").id = cover_id + "-blurb";
+    cover.find(".cover-title").id = cover_id + "-title";
+    cover.find(".cover-blurb").id = cover_id + "-blurb";
 
     // insert the new cover into the page before filling
     // it with a title and blurb
@@ -52,8 +52,8 @@ function load_book_cover(book) {
     $("#background").append(cover);
 
     // load the book data
-    // $(`#${cover_id}-title`).load(`books/${book} #book-title`);
-    // $(`#${cover_id}-blurb`).load(`books/${book} #book-blurb`);
+    $(`#${cover_id}-title`).load(`books/${book} #book-title`);
+    $(`#${cover_id}-blurb`).load(`books/${book} #book-blurb`);
 
     // $.get(`books/${book}`, function(string_data) {
     //     // extract the title and blurb from the book
@@ -78,15 +78,13 @@ function book_directory_not_found() {
     alert("Can't find books/directory.json")
 }
 
-function setup(event) {
-    //// set the random background gradient
-    gradient = random_gradient();
-    
+function setup(event) {    
     // we could set the background directly
     // $(".background").css("background-image", gradient).show();
 
     // or via the variable
-    root.style.setProperty("--background-gradient", gradient);
+    root.style.setProperty("--background-gradient", random_gradient());
+    root.style.setProperty("--title-gradient", random_gradient());
 
     if (page_id == "index") {
         // locate all the books in the directory
