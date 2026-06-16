@@ -103,6 +103,7 @@ footer {
 
 .inner {
     overflow: hidden;
+    flex: 1;
 }
 
 .book {

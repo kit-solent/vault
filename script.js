@@ -39,10 +39,13 @@ function load_book_cover(book) {
 
     // remove the ".html" from the book name
     var cover_id = "book-"+book.slice(0, -5);
-    cover.id = cover_id;
+    cover.attr("id", cover_id);
+    console.log("Setting the id of cover: ")
+    console.log(cover)
+    console.log("to: "+cover_id)
 
-    cover.find(".cover-title").id = cover_id + "-title";
-    cover.find(".cover-blurb").id = cover_id + "-blurb";
+    cover.find(".cover-title").attr("id", cover_id + "-title");
+    cover.find(".cover-blurb").attr("id", cover_id + "-blurb");
 
     // insert the new cover into the page before filling
     // it with a title and blurb
@@ -52,8 +55,9 @@ function load_book_cover(book) {
     $("#background").append(cover);
 
     // load the book data
-    $(`#${cover_id}-title`).load(`books/${book} #book-title`);
-    $(`#${cover_id}-blurb`).load(`books/${book} #book-blurb`);
+    $(`#${cover_id}-title`).load(`books/${book} .book-title`);
+    
+    $(`#${cover_id}-blurb`).load(`books/${book} .book-blurb`);
 
     // $.get(`books/${book}`, function(string_data) {
     //     // extract the title and blurb from the book
@@ -81,6 +85,16 @@ function book_directory_not_found() {
 function setup(event) {    
     // we could set the background directly
     // $(".background").css("background-image", gradient).show();
+
+    // $(`#background`).load(`books/cena.html .book-title`, function(response, status, xhr) {
+    //     if (status === "success") {
+    //         console.log("loading cena.html successfully");
+    //         console.log("Details: ", response.length, status);
+    //         console.log(response)
+    //     } else if (status === "error") {
+    //         console.log("Error details: "+xhr.status + " " + xhr.statusText);
+    //     }
+    // });
 
     // or via the variable
     root.style.setProperty("--background-gradient", random_gradient());
