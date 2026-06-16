@@ -56,7 +56,9 @@ function load_book_cover(book) {
 
     // load the book data
     $(`#${cover_id}-title`).load(`books/${book} .book-title`);
-    
+    $(`.book-title`).replaceWith(function () {
+        return $(this).contents();
+    });
     $(`#${cover_id}-blurb`).load(`books/${book} .book-blurb`);
 
     // $.get(`books/${book}`, function(string_data) {
