@@ -24,7 +24,12 @@ function cover_focus_lost() {
     $(this).scrollTop(0);
 }
 
+function cover_clicked() {
+    window.location.href = "books/"+$(this).attr("id").slice(5)+".html";
+}
+
 function process_book_directory(data) {
+    console.log(data);
     data.forEach(book => load_book_cover(book));
     // TODO: make and here remove a message saying that books are still being loaded
 }
@@ -40,65 +45,34 @@ function load_book_cover(book) {
     // remove the ".html" from the book name
     var cover_id = "book-"+book.slice(0, -5);
     cover.attr("id", cover_id);
-    console.log("Setting the id of cover: ")
-    console.log(cover)
-    console.log("to: "+cover_id)
 
     cover.find(".cover-title").attr("id", cover_id + "-title");
     cover.find(".cover-blurb").attr("id", cover_id + "-blurb");
 
     // insert the new cover into the page before filling
     // it with a title and blurb
-    console.log("adding a cover");
-    // console.log(typeof(cover));
-    // console.log(cover);
     $("#background").append(cover);
 
     // load the book data
-    $(`#${cover_id}-title`).load(`books/${book} .book-title`);
-    $(`.book-title`).replaceWith(function () {
-        return $(this).contents();
-    });
-    $(`#${cover_id}-blurb`).load(`books/${book} .book-blurb`);
+    // $(`#${cover_id}-title`).load(`books/${book} .book-title`, function () {
+    //     $(this).find(`.book-title`).replaceWith(function () {
+    //         return $(this).contents();
+    //     });
+    // });
 
-    // $.get(`books/${book}`, function(string_data) {
-    //     // extract the title and blurb from the book
-    //     var data = $(string_data);
-    //     console.log((string_data));
-    //     console.log(typeof(data));
-    //     console.log(data);
-
-    //     title = data.querySelector(".book-title");
-    //     blurb = data.querySelector(".book-blurb");
-
-    //     // get a copy of the book cover template
-    //     cover = cover_template.content.cloneNode(true);
-    //     cover.querySelector(".cover-title").textContent = title;
-    //     cover.querySelector(".cover-blurb").textContent = blurb;
-
-    // },"html") // we should be getting html data
+    // $(`#${cover_id}-blurb`).load(`books/${book} .book-blurb`, function () {
+    //     $(this).find(`.book-blurb`).replaceWith(function () {
+    //         return $(this).contents();
+    //     })
+    // });
 }
 
 function book_directory_not_found() {
-    console.log("Can't find books/directory.json")
-    alert("Can't find books/directory.json")
+    console.log("Can't find books/directory.json");
+    $("#background").append("<p>books/directory.json can't be found, whoever made this website needs to lock in</p>")
 }
 
 function setup(event) {    
-    // we could set the background directly
-    // $(".background").css("background-image", gradient).show();
-
-    // $(`#background`).load(`books/cena.html .book-title`, function(response, status, xhr) {
-    //     if (status === "success") {
-    //         console.log("loading cena.html successfully");
-    //         console.log("Details: ", response.length, status);
-    //         console.log(response)
-    //     } else if (status === "error") {
-    //         console.log("Error details: "+xhr.status + " " + xhr.statusText);
-    //     }
-    // });
-
-    // or via the variable
     root.style.setProperty("--background-gradient", random_gradient());
     root.style.setProperty("--title-gradient", random_gradient());
 
@@ -111,81 +85,7 @@ function setup(event) {
     //// bind loss of mouse focus for covers
     $(".cover").attr("tabindex", -1);
     $(".cover").on("mouseout", cover_focus_lost);
+    $(document).on("click", ".cover", cover_clicked);
 }
 
 document.addEventListener("DOMContentLoaded", setup);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * creates and sets up the background elements if required.
- * runs the first transition.
-function setup_gradient_changes(gradient = null) {
-    if (!gradient) {
-        gradient = random_gradient();
-    }
-
-    var color_effect_elements = document.getElementsByClassName("background-placer");
-
-    // loop over all elements with the class background-placer
-    for (let i=0; i<color_effect_elements.length; i++) {
-        var element = color_effect_elements[i];
-
-        // count the number of elements with both background-primary and background-secondary classes
-        var double_count = element.getElementsByClassName("background-primary background-secondary").length;
-
-        // if there are any double ups then warn the console and remove the background-secondary class from all of them.
-        if (double_count > 0) {
-            console.warn("Elements cannot use both background-primary and background-secondary classes. The background-secondary class will be removed from all that have both.");
-
-            element.getElementsByClassName("background-primary background-secondary").forEach(element => element.classList.remove("background-secondary"))
-        }
-
-        // tally up the background-primary and background-secondary elements.
-        var background_primary_count = element.getElementsByClassName("background-primary").length;
-        var background_secondary_count = element.getElementsByClassName("background-secondary").length;
-
-        if (background_primary_count >= 2) {
-            // warn the console but don't change anything
-            console.warn("Multiple elements with the class background-primary found.");
-        }
-
-        // if no background-primary was found then make one.
-        if (background_primary_count == 0) {
-            var primaryDiv = document.createElement("div");
-            primaryDiv.className = "background-primary";
-            element.prepend(primaryDiv);
-        }
-
-        // if no background-secondary was found then make one.
-        if (background_secondary_count == 0) {
-            // since we removed the background-secondary class from all the double ups warn the console
-            // that this could have caused the current lack of background-secondary element.
-            if (double_count > 0) {
-                console.warn("No background-secondary class found but one was removed earlier due to the presence of a background-primary class. One will be created now.");
-            }
-
-            var secondaryDiv = document.createElement("div");
-            secondaryDiv.classList = "background-secondary";
-            element.prepend(secondaryDiv);
-        }
-
-        // put the backgrounds into the correct order. This is required for the fading effect to work.
-        reorder_children(element);
-
-        // prevents initial black screen before fist transition.
-        next_gradient();
-    }
-}
-*/
